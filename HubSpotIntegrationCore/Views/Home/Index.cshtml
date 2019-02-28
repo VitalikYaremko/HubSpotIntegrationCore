@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<link href="~/css/StyleSheet.css" rel="stylesheet" type="text/css" />
+
+<div class="my_center">
+    @using (Html.BeginForm("ContactsByCount", "Home", FormMethod.Get))
+    {
+        <input type="text" name="count" id="count" maxlength="3" value="10" />
+        <input class="btn btn-success" type="submit" value="Show Last Contacts By Count" />
+    }
+    @using (Html.BeginForm("ContactsByTime", "Home", FormMethod.Get))
+    {
+        <input class="btn btn-success" style="width:100%" type="submit" value="Show Contacts By Time" />
+        <input class="form-control" value="2018-09-13 13:36" type="datetime-local" data-val="true" data-val-required="The DateUploaded field is required." name="offsetTime" />
+    }
+</div>

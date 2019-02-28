@@ -1,0 +1,21 @@
+﻿div.my_center {
+    height: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+div.my_center p {
+    margin: 0
+}
+input[type=text] {
+    width: 23%;
+    padding: 7px 39px;
+    padding-top: 4px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+ 
