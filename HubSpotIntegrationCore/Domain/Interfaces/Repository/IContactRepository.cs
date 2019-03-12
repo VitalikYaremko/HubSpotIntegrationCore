@@ -9,6 +9,7 @@ namespace HubSpotIntegrationCore.Domain.Interfaces.Repository
     public interface IContactRepository
     {
         Task<ListContactModel> GetContactsByTime(double timeOffset);
+        Task<ListContactModel> GetContactsByTime(double timeOffset, double vidOffset);
         Task<ListContactModel> GetLastModifedContacts(int count);
         Task<ContactRecordModel> GetContactRecordByVID(int vid);
     }

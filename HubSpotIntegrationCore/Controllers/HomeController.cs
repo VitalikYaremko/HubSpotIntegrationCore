@@ -25,9 +25,10 @@ namespace HubSpotIntegrationCore.Controllers
 
             return View("Contacts");
         }
-        public async Task<IActionResult> ContactsByTime(DateTime offsetTime)
+        public async Task<IActionResult> ContactsByTime(DateTime offsetTime,double vidOffset)
         {
-            var contacts = await _contactService.GetListContactByTime(offsetTime);
+            
+            var contacts = await _contactService.GetListContactByTime(offsetTime, vidOffset);
             var list_contacts = await _contactService.FillContactModel(contacts);
             _contactService.CreateExcelFileByContacts(list_contacts);
 

@@ -9,6 +9,7 @@ namespace HubSpotIntegrationCore.Domain.Interfaces.Services
     public interface IContactService
     {
         Task<ListContactModel> GetListContactByTime(DateTime modifiedOnOrAfter);
+        Task<ListContactModel> GetListContactByTime(DateTime timeOffset, double vidOffset);
         Task<ListContactModel> GetLastListContact(int count);
         Task<List<ContactModel>> FillContactModel(ListContactModel contacts);
         void CreateExcelFileByContacts(List<ContactModel> contactModels);

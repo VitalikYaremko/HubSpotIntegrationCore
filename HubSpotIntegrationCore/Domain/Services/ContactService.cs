@@ -24,6 +24,11 @@ namespace HubSpotIntegrationCore.Domain.Services
             var contacts = await _contactRepository.GetContactsByTime(ConvertUtils.DateTimeToUnixTimeStamp(modifiedOnOrAfter));
             return contacts;
         }
+        public async Task<ListContactModel> GetListContactByTime(DateTime timeOffset, double vidOffset)
+        {
+            var contacts = await _contactRepository.GetContactsByTime(ConvertUtils.DateTimeToUnixTimeStamp(timeOffset),vidOffset);
+            return contacts;
+        }
         public async Task<ListContactModel> GetLastListContact(int count)
         {
             var contacts = await _contactRepository.GetLastModifedContacts(count);
@@ -48,6 +53,7 @@ namespace HubSpotIntegrationCore.Domain.Services
                     string _State = null;
                     string _Phone = null;
                     string _Zip = null;
+                    string _WebSite = null;
 
                     var record = await _contactRepository.GetContactRecordByVID(contact.vid);
                     if (record != null)
@@ -63,7 +69,29 @@ namespace HubSpotIntegrationCore.Domain.Services
                         _State = record.associatedcompany.properties.state.value;
                         _Phone = record.associatedcompany.properties.phone.value;
                         _Zip = record.associatedcompany.properties.zip.value;
+                        _WebSite = record.associatedcompany.properties.website.value;
                         //Associated_company
+
+                        if (_Zip == null)
+                        {
+                            _Zip = record.properties.zip.value;
+                        }
+                        if(_State == null)
+                        {
+                            _State = record.properties.state.value;
+                        }
+                        if (_City == null)
+                        {
+                            _City = record.properties.city.value;
+                        }
+                        if (_Phone == null)
+                        {
+                            _Phone = record.properties.phone.value;
+                        }
+                        if (_Name == null)
+                        {
+                            _Name = contact.properties.company.value;
+                        }
                     }
                     _Firstname = contact.properties.firstname.value;
                     _Lastname = contact.properties.lastname.value;
@@ -80,7 +108,8 @@ namespace HubSpotIntegrationCore.Domain.Services
                         City = _City,
                         State = _State,
                         Zip = _Zip,
-                        Phone = _Phone
+                        Phone = _Phone,
+                        Website = _WebSite 
                     };
                     contactModels.Add(contactModel);
                 }

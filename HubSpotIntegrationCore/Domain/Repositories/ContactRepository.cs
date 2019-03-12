@@ -25,6 +25,19 @@ namespace HubSpotIntegrationCore.Domain.Repositories
                 throw;
             } 
         }
+        public async Task<ListContactModel> GetContactsByTime(double timeOffset, double vidOffset)
+        {
+            try
+            {
+                string url = $"{_baseApiUrl}/contacts/v1/lists/recently_updated/contacts/recent?hapikey=demo&timeOffset={timeOffset}&vidOffset={vidOffset}";
+                var contacts = await Task.Run(() => HttpUtils.loadJson<ListContactModel>(url));
+                return contacts;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
         public async Task<ListContactModel> GetLastModifedContacts(int count)
         { 
             try
